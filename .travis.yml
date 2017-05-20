@@ -1,0 +1,14 @@
+language: minimal
+sudo: required
+
+services:
+  - docker
+
+before_script:
+  - docker build --rm -t rust-ci -f Dockerfile .
+  - curl -o $HOME/stamp https://s3.amazonaws.com/rust-lang-ci/rust-ci-mirror/2017-03-17-stamp-x86_64-unknown-linux-musl &&
+    chmod +x $HOME/stamp
+
+script:
+  # - cargo run
+  - $HOME/stamp docker run --volume "$PWD:/x" --privileged --rm rust-ci /x/run.sh
