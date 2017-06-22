@@ -2,7 +2,7 @@
 
 ```
 use std::os::raw::{c_char, c_int};
-#[link(name="legacy_stdio_definitions", kind="static")]
+#[cfg_attr(all(windows, target_env="msvc"), link(name="legacy_stdio_definitions", kind="static"))]
 extern "C" {
     fn printf(_: *const c_char, ...) -> c_int;
 }
@@ -24,7 +24,7 @@ pub fn wut() {}
 #[test]
 fn orly() {
     use std::os::raw::{c_char, c_int};
-    #[link(name="legacy_stdio_definitions", kind="static")]
+    #[cfg_attr(all(windows, target_env="msvc"), link(name="legacy_stdio_definitions", kind="static"))]
     extern "C" {
         fn printf(_: *const c_char, ...) -> c_int;
     }
