@@ -1,22 +1,44 @@
-# language: minimal
-# sudo: required
+language: shell
+sudo: false
 
-# services:
-#   - docker
-
-# before_script:
-#   - docker build --rm -t rust-ci -f Dockerfile .
-#   - curl -o $HOME/stamp https://s3.amazonaws.com/rust-lang-ci/rust-ci-mirror/2017-03-17-stamp-x86_64-unknown-linux-musl &&
-#     chmod +x $HOME/stamp
-
-# script:
-#   # - cargo run
-#   - $HOME/stamp docker run --volume "$PWD:/x" --privileged --rm rust-ci /x/run.sh
-
-language: rust
-
-rust:
-  - nightly
+matrix:
+  include:
+    - env: IMAGE=0
+      os: linux
+    - env: IMAGE=1
+      os: linux
+    - env: IMAGE=2
+      os: osx
+    - env: IMAGE=3
+      os: osx
+    - env: IMAGE=4
+      os: linux
+    - env: IMAGE=5
+      os: linux
+    - env: IMAGE=6
+      os: linux
+    - env: IMAGE=7
+      os: linux
+    - env: IMAGE=8
+      os: linux
+    - env: IMAGE=9
+      os: osx
+    - env: IMAGE=10
+      os: osx
+    - env: IMAGE=11
+      os: osx
+    - env: IMAGE=12
+      os: linux
+    - env: IMAGE=13
+      os: linux
+    - env: IMAGE=14
+      os: linux
+    - env: IMAGE=15
+      os: linux
+    - env: IMAGE=16
+      os: linux
 
 script:
-  - cargo test -- --nocapture
+  - date
+  - sleep 30
+  - date
