@@ -1,5 +1,8 @@
-language: shell
+language: rust
 sudo: false
 
-script
-  - echo 1
+before_install:
+  - stty cols 120
+
+rust:
+  - nightly
