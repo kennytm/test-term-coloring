@@ -5,8 +5,9 @@ matrix:
   fast_finish: true
   include:
     - env: SOMETHING=4
-      if: branch = master
+      if: branch = secondary
     - env: SOMETHING=5
+      if: branch = secondary
     - env: SOMETHING=6
       if: branch = secondary
 
