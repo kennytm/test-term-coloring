@@ -1,8 +1,13 @@
-language: rust
-sudo: false
+language: shell
+sudo: required
 
-before_install:
-  - stty cols 120
+jobs:
+  include:
+    - stage: master
+      env: SOMETHING=1
+    - env: SOMETHING=2
+    - env: SOMETHING=3
 
-rust:
-  - nightly
+script:
+  - ./run.sh
+
