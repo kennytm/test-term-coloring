@@ -1,12 +1,13 @@
 language: shell
-sudo: required
+sudo: false
 
-jobs:
+matrix:
+  fast_finish: true
   include:
-    - stage: master
-      env: SOMETHING=1
-    - env: SOMETHING=2
-    - env: SOMETHING=3
+    - env: SOMETHING=4
+      if: branch = master
+    - env: SOMETHING=5
+    - env: SOMETHING=6
       if: branch = secondary
 
 script:
