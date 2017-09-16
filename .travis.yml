@@ -1,20 +1,14 @@
-language: python
+language: shell
 sudo: false
-
-env:
-  - PSYCOPG2_TESTDB_USER=postgres
 
 matrix:
   fast_finish: true
   include:
-    - python: 2.6
-    - python: 3.2
+    - env: EXIT_CODE=0
       if: branch = python3
-    - python: pypy
-    - python: pypy3
-      if: branch = python3
+    - env: EXIT_CODE=1
+      if: branch = master
 
 script:
-  - echo $PSYCOPG2_TESTDB_USER
-  - python -V
+  - sh -c "exit $EXIT_CODE"
 
