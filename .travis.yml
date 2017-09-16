@@ -7,6 +7,7 @@ jobs:
       env: SOMETHING=1
     - env: SOMETHING=2
     - env: SOMETHING=3
+      if: branch = secondary
 
 script:
   - ./run.sh
