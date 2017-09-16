@@ -1,16 +1,20 @@
-language: shell
+language: python
 sudo: false
+
+env:
+  - PSYCOPG2_TESTDB_USER=postgres
 
 matrix:
   fast_finish: true
   include:
-    - env: SOMETHING=4
-      if: branch = secondary
-    - env: SOMETHING=5
-      if: branch = secondary
-    - env: SOMETHING=6
-      if: branch = secondary
+    - python: 2.6
+    - python: 3.2
+      if: branch = python3
+    - python: pypy
+    - python: pypy3
+      if: branch = python3
 
 script:
-  - ./run.sh
+  - echo $PSYCOPG2_TESTDB_USER
+  - python -V
 
