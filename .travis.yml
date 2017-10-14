@@ -1,14 +1,7 @@
 language: shell
 sudo: false
 
-matrix:
-  fast_finish: true
-  include:
-    - env: EXIT_CODE=0
-      if: branch = python3
-    - env: EXIT_CODE=1
-      if: branch = master
-
 script:
-  - sh -c "exit $EXIT_CODE"
+  - cat /proc/cpuinfo
+  - cat /proc/meminfo
 
