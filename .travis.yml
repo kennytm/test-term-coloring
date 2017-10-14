@@ -1,5 +1,5 @@
 language: shell
-sudo: false
+sudo: true
 
 script:
   - cat /proc/cpuinfo
