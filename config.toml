@@ -1,0 +1,24 @@
+[llvm]
+ccache = true
+ninja = true
+targets = "X86"
+release-debuginfo = true
+assertions = false
+
+[build]
+docs = true
+compiler-docs = true
+submodules = false
+sanitizers = false
+
+[rust]
+optimize = true
+codegen-units = 31
+use-jemalloc = true
+optimize-tests = false
+debuginfo-tests = false
+
+[target.x86_64-unknown-linux-gnu]
+llvm-config = "/usr/lib/llvm-4.0/bin/llvm-config"
+cc = "clang"
+cxx = "clang++"

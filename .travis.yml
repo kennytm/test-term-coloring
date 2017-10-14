@@ -1,7 +1,45 @@
 language: shell
-sudo: true
+sudo: false
+
+addons:
+  apt:
+    sources:
+      # - llvm-toolchain-trusty-4.0
+      - debian-sid
+      # - ubuntu-toolchain-r-test
+    packages:
+      - locales=2.13+git20120306-12.1
+      - cmake
+      # - clang-4.0=1:4.0~svn305264-1~exp1
+      - llvm-4.0-tools #=1:4.0~svn305264-1~exp1
+      # - libclang1-4.0=1:4.0~svn305264-1~exp1
+      # - libclang-common-4.0-dev=1:4.0~svn305264-1~exp1
+      - ninja-build
+
+# install:
+#   - >
+#     curl -fLO http://releases.llvm.org/5.0.0/clang+llvm-5.0.0-linux-x86_64-ubuntu14.04.tar.xz &&
+#     tar xf clang+llvm-5.0.0-linux-x86_64-ubuntu14.04.tar.xz &&
+#     mv clang+llvm-5.0.0-linux-x86_64-ubuntu14.04 $HOME/clang
+#   - ln -s /usr/bin/ar /home/travis/clang/bin/ar
+# install:
+#   - >
+#     curl -fLO https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz &&
+#     tar xf cmake-3.9.4-Linux-x86_64.tar.gz &&
+#     ls -a cmake-3.9.4-Linux-x86_64
+
+cache:
+  directories:
+    - $HOME/rust
+    - $HOME/.ccache
+    - $HOME/.cargo
 
 script:
-  - cat /proc/cpuinfo
-  - cat /proc/meminfo
+  # - rm -rf ~/rust/build
+  # - ~/clang/bin/clang++ -v
+  - g++ -v
+  - timeout -s3 45m ./run.sh
+  - echo ok
 
+notifications:
+  email: false
