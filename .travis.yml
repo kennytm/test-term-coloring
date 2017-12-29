@@ -1,18 +1,14 @@
-language: c
+language: shell
 sudo: false
-os: osx
+os: linux
 
-script:
-  - clang lets_crash.c
-  - ./a.out
-  - mv a.out stack-probes.stage2-x86_64-apple-darwin
-  - ./stack-probes.stage2-x86_64-apple-darwin
-  - sleep 10
-  - ls -la $HOME/Library/Logs/DiagnosticReports/
-  - find $HOME/Library/Logs/DiagnosticReports
-      -type f
-      -not -name '*.stage2-*.crash'
-      -not -name 'com.apple.CoreSimulator.CoreSimulatorService-*.crash'
-      -exec printf travis_fold":start:crashlog\n\033[31;1m%s\033[0m" {} \;
-      -exec head -750 {} \;
-      -exec echo travis_fold":"end:crashlog \;
+jobs:
+  include:
+    - script: echo hi
+      if: env(TRAVIS_COMMIT_MESSAGE) =~ abcdef
+    - script: echo hi2
+      if: env(TRAVIS_COMMIT_MESSAGE) =~ tuvwxy
+    - script: echo hi3
+      if: NOT env(TRAVIS_COMMIT_MESSAGE) =~ tuvwxy
+
+
