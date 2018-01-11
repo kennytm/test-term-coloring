@@ -1,0 +1,11 @@
+# install:
+#   - curl -sSf -o rustup-init.exe https://win.rustup.rs/
+#   - rustup-init.exe -y
+#   - set PATH=%PATH%;C:\Users\appveyor\.cargo\bin
+#   - rustc -Vv
+#   - cargo -V
+
+test_script:
+  - type 1.txt
+
+build: false
