@@ -1,0 +1,7 @@
+language: shell
+sudo: false
+os: linux
+
+script:
+ - false
+
