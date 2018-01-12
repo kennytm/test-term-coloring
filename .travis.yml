@@ -3,5 +3,6 @@ sudo: false
 os: linux
 
 script:
- - false
+ - sleep 60
+ - true
 
