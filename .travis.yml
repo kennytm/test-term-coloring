@@ -1,0 +1,8 @@
+language: shell
+sudo: false
+os: linux
+
+script:
+ - sleep 60
+ - true
+
