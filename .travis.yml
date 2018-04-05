@@ -2,7 +2,9 @@ language: shell
 sudo: false
 os: linux
 
-script:
- - sleep 60
- - true
+matrix:
+  include:
+    - script: "true"
+    - script: "false"
+      if: type = disabled
 
