@@ -6,5 +6,4 @@ matrix:
   include:
     - script: "sleep 10"
     - script: "false"
-      if: type = disabled
 
