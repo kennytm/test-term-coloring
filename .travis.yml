@@ -4,7 +4,7 @@ os: linux
 
 matrix:
   include:
-    - script: "true"
+    - script: "sleep 60"
     - script: "false"
       if: type = disabled
 
