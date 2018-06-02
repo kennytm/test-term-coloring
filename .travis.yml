@@ -1,10 +1,16 @@
 language: shell
-sudo: false
-os: linux
+sudo: required
+dist: trusty
+services:
+  - docker
 
-matrix:
-  include:
-    - script: "sleep 10"
-    - script: "false"
-      if: type = disabled
+before_install:
+  - echo '{"ipv6":true,"fixed-cidr-v6":"fd9a:8454:6789:13f7::/64"}' | sudo tee /etc/docker/daemon.json;
+    sudo service docker restart;
 
+install:
+  - curl -vfO https://s3-us-west-1.amazonaws.com/rust-lang-ci2/rust-ci-mirror/2017-03-17-stamp-x86_64-unknown-linux-musl
+
+script:
+  - docker build --rm -t test-curl-stuff -f Dockerfile "."
+  - docker run --init --rm test-curl-stuff curl -vfO https://s3-us-west-1.amazonaws.com/rust-lang-ci2/rust-ci-mirror/2017-03-17-stamp-x86_64-unknown-linux-musl
