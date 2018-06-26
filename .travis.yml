@@ -1,16 +1,21 @@
-language: shell
-sudo: required
-dist: trusty
-services:
-  - docker
-
-before_install:
-  - echo '{"ipv6":true,"fixed-cidr-v6":"fd9a:8454:6789:13f7::/64"}' | sudo tee /etc/docker/daemon.json;
-    sudo service docker restart;
+language: rust
+os: osx
+osx_image: xcode6.4
+rust: nightly
 
 install:
-  - curl -vfO https://s3-us-west-1.amazonaws.com/rust-lang-ci2/rust-ci-mirror/2017-03-17-stamp-x86_64-unknown-linux-musl
+  - curl -L -O https://github.com/kennytm/rustup-toolchain-install-master/releases/download/v1.1.0/rustup-toolchain-install-master_1.1.0_x86_64-apple-darwin.bz2
+  - bunzip2 rustup-toolchain-install-master_1.1.0_x86_64-apple-darwin.bz2
+  - mv rustup-toolchain-install-master_1.1.0_x86_64-apple-darwin ~/.cargo/bin/rustup-toolchain-install-master
+  - chmod a+x ~/.cargo/bin/rustup-toolchain-install-master
 
 script:
-  - docker build --rm -t test-curl-stuff -f Dockerfile "."
-  - docker run --init --rm test-curl-stuff curl -vfO https://s3-us-west-1.amazonaws.com/rust-lang-ci2/rust-ci-mirror/2017-03-17-stamp-x86_64-unknown-linux-musl
+  - rustc 1.rs
+  - ./1
+  - lldb ./1 < script.lldb
+  - rustup-toolchain-install-master 77a8ed98fc66821a410b0c4696ba99b07b713467 7eed9fcb944a0205e2c38dd96f19918edf90747c
+  - rustc +77a8ed98fc66821a410b0c4696ba99b07b713467 1.rs
+  - ./1
+  - rustc +7eed9fcb944a0205e2c38dd96f19918edf90747c 1.rs
+  - ./1
+
