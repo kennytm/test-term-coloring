@@ -1,34 +1,18 @@
-language: rust
-os: osx
-osx_image: xcode6.4
-rust: nightly
+language: shell
 
-install:
-  - curl -L -O https://github.com/kennytm/rustup-toolchain-install-master/releases/download/v1.1.0/rustup-toolchain-install-master_1.1.0_x86_64-apple-darwin.bz2
-  - bunzip2 rustup-toolchain-install-master_1.1.0_x86_64-apple-darwin.bz2
-  - mv rustup-toolchain-install-master_1.1.0_x86_64-apple-darwin ~/.cargo/bin/rustup-toolchain-install-master
-  - chmod a+x ~/.cargo/bin/rustup-toolchain-install-master
+matrix:
+ fast_finish: true
+ include:
+  - env: FOO=1
+    os: osx
+    osx_image: xcode9.3
+    if: branch = master
+  - env: FOO=2
+    os: osx
+    osx_image: xcode9.3-moar
+    if: branch = master
+
 
 script:
-  - rustc 1.rs
-  - ! ./1
-  - rustup-toolchain-install-master 29f834a3454c3cb81ff5d179dd548beea6f6499e
-  - rustup default 29f834a3454c3cb81ff5d179dd548beea6f6499e
-  - rustc 1.rs
-  - ./1
-  - rustc -O 1.rs
-  - ./1
-  - rustc 51794.rs
-  - ! ./51794
-  - rustc -O 51794.rs
-  - ! ./51794
-  - rustc --test 50867.rs
-  - ./50867
-  - rustc --test -O 50867.rs
-  - ./50867
-  - rustc -Ctarget-feature=+avx -C opt-level=3 -Clto -g 44056.rs
-  - ./44056
-  - RUSTFLAGS="-C target-cpu=native" cargo run --release
-  - RUSTFLAGS="-C target-cpu=native" cargo run --release
-  - RUSTFLAGS="-C target-cpu=native" cargo run --release
-  - RUSTFLAGS="-C target-cpu=native" cargo run --release
+  - echo $FOO
+
