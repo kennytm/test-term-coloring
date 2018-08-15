@@ -1,9 +1,17 @@
 language: shell
-sudo: false
-os: linux
 
 matrix:
-  include:
-    - script: "sleep 10"
-    - script: "false"
+ fast_finish: true
+ include:
+  - env: FOO=1
+    os: osx
+    osx_image: xcode9.3
+    if: branch = master
+  - env: FOO=2
+    os: osx
+    osx_image: xcode9.3-moar
+    if: branch = master
 
+
+script:
+  - echo $FOO
