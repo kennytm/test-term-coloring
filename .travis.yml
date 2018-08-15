@@ -15,4 +15,3 @@ matrix:
 
 script:
   - echo $FOO
-
