@@ -1,7 +1,7 @@
 language: shell
 
 script:
-  - echo ok
+  - /bin/false
 
 notifications:
   email: false
